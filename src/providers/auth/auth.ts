@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+
+import firebase from 'firebase/app';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,8 +11,30 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello AuthProvider Provider');
+  constructor() {
   }
 
+  logInUser(email:string,password:string): firebase.Promise<any> {
+    return firebase.auth().signInWithEmailAndPassword(email,password);
+  }
+
+  signUpUser(email:string,password:string): firebase.Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(email,password).then(newUser => {
+      firebase.database().ref('userProfile').child(newUser.uid).set({email:email});
+    });
+  }
+
+  resetPassword(email:string): firebase.Promise<void> {
+    return firebase.auth().sendPasswordResetEmail(email);
+  }
+
+  logoutUser(): firebase.Promise<void> {
+    return firebase.auth().signOut();
+  }
+
+
+
+  logOutUser(){
+
+  }
 }
