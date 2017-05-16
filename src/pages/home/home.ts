@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -11,8 +11,16 @@ export class HomePage {
 
   }
 
-  goToProfile(){
+  goToProfile() {
     this.navCtrl.push('profile');
+  }
+
+  goToCreate() {
+    this.navCtrl.push('event-create');
+  }
+
+  goToList() {
+    this.navCtrl.push('event-list');
   }
 
 }
