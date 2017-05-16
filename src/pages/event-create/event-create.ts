@@ -7,7 +7,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+@IonicPage({
+  name:'event-create'
+})
 @Component({
   selector: 'page-event-create',
   templateUrl: 'event-create.html',
