@@ -61,14 +61,16 @@ export class EventProvider {
     return firebase.database().ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`).child(eventId).child('guestList').push({
       guestName: guestName
     }).then(newGuest => {
+      if (guestPicture != null) {
+        firebase.storage().ref('/guestProfile/').child(newGuest.key).child('profilePicture.png').putString(guestPicture, 'base64', {contentType: 'image/png'}).then((savedPicture) => {
+          firebase.database().ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`).child(eventId).child('guestList').child(newGuest.key).child('profilePicture').set(savedPicture.downloadURL);
+        });
+      }
       firebase.database().ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`).child(eventId).transaction(event => {
-        console.log(event);
-        console.log(eventPrice);
         event.revenue += eventPrice;
         return event;
       });
     });
   }
-
 
 }
