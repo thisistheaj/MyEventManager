@@ -11,7 +11,6 @@ import * as firebase from "firebase/app";
 export class ProfileProvider {
 
   constructor() {
-    console.log('Hello ProfileProvider Provider');
   }
 
   getUserProfile(): Promise<any> {

@@ -31,10 +31,4 @@ export class AuthProvider {
   logoutUser(): firebase.Promise<void> {
     return firebase.auth().signOut();
   }
-
-
-
-  logOutUser(){
-
-  }
 }

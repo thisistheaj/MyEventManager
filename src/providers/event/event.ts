@@ -13,9 +13,7 @@ export class EventProvider {
   }
 
   createEvent(eventName: string, eventDate: string, eventPrice: number, eventCost: number): firebase.Promise<any> {
-    return firebase.database()
-      .ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`)
-      .push({
+    return firebase.database().ref(`userProfile/${firebase.auth().currentUser.uid}/eventList`).push({
         name: eventName,
         date: eventDate,
         price: eventPrice * 1,
