@@ -12,6 +12,8 @@ import {EventProvider} from '../../providers/event/event';
 })
 export class EventDetailPage {
   public currentEvent: any;
+  public guestName: string;
+  public guestPicture:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public eventProvider: EventProvider) {
   }
@@ -19,6 +21,12 @@ export class EventDetailPage {
   ionViewDidEnter() {
     this.eventProvider.getEventDetail(this.navParams.get('eventId')).then(eventSnap => {
       this.currentEvent = eventSnap;
+    });
+  }
+
+  addGuest(guestName) {
+    this.eventProvider.addGuest(guestName, this.currentEvent.id, this.currentEvent.price, this.guestPicture).then(() => {
+      this.guestName = '';
     });
   }
 
